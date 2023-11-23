@@ -4,9 +4,10 @@ import Image from "next/image";
 import gsap, { Power3 } from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import { useLayoutEffect, useRef } from "react";
-import "./Home.css";
 
 import heroLeftCard from "@/assets/heroLeft.png";
+import heroBackground from "@/assets/hero-background.png";
+import heroCard from "@/assets/heroCard.png";
 import arrowRight from "@/assets/arrow-right.svg";
 
 const Hero = () => {
@@ -47,12 +48,25 @@ const Hero = () => {
 
   return (
     <>
-      <main className="enclosure">
-        <section className="card bgHeroCard">
-          <section className="heroCard ">
-            <article style={{ width: "400px" }} className="headerText ">
+      <main
+        style={{
+          backgroundImage: `url(${heroBackground.src})`,
+        }}
+        className="pt-36 h-screen"
+      >
+        <section
+          style={{
+            backgroundImage: `url(${heroCard.src})`,
+          }}
+          className="card opacity-0 m-auto bg-no-repeat w-max relative z-[1] bg-cover"
+        >
+          <section className="heroCard p-16 flex mx-auto">
+            <article
+              style={{ width: "400px" }}
+              className="headerText flex flex-col justify-center"
+            >
               <div
-                className="slickCard "
+                className="w-max bg-[rgb(26,0,154)] text-white rounded-full p-1 pl-2 inline-block text-sm font-normal"
                 onMouseEnter={onEnter}
                 onMouseLeave={onLeave}
               >
@@ -61,12 +75,14 @@ const Hero = () => {
                   ref={arrowRef}
                   src={arrowRight}
                   alt="arrowRight"
-                  className="spacingArrowRight inline hover:animate-pulse"
+                  className="mx-1 inline hover:animate-pulse"
                 />
               </div>
               <div>
-                <h1>Impactful stories. Made effortlessly</h1>
-                <p>
+                <h1 className="text-gray-200 my-5 text-6xl font-semibold leading-[67px]">
+                  Impactful stories. Made effortlessly
+                </h1>
+                <p className="text-gray-500">
                   Gorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
                   vulputate libero et velit interdum, ac aliquet odio mattis.
                 </p>
@@ -78,7 +94,7 @@ const Hero = () => {
                 width={400}
                 height={468}
                 alt="blocks"
-                className="heroLeftBlock mx-2 object-contain"
+                className="mx-2 object-contain"
               />
             </article>
           </section>
