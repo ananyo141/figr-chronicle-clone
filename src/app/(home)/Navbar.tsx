@@ -3,7 +3,7 @@
 import React, { useLayoutEffect } from "react";
 import Image from "next/image";
 import gsap from "gsap";
-import { ScrollTrigger, TextPlugin, Linear } from "gsap/all";
+import { ScrollTrigger, TextPlugin, Power3 } from "gsap/all";
 
 import logo from "@/assets/logo.png";
 
@@ -25,7 +25,20 @@ const Navbar = (props: Props) => {
       opacity: 0,
       scale: 2,
       text: "",
-      ease: Linear.easeInOut,
+      ease: Power3.easeInOut,
+      delay: 0.2,
+    });
+
+    gsap.to(".logo-image", {
+      scrollTrigger: {
+        trigger: ".logo-image",
+        start: "top",
+        end: "+=200",
+        scrub: 3,
+      },
+      duration: 2,
+      scale: 1.2,
+      ease: Power3.easeInOut,
       delay: 0.2,
     });
   }, []);
@@ -33,9 +46,9 @@ const Navbar = (props: Props) => {
   return (
     <nav className="fixed flex justify-between w-full pt-5 px-8">
       <div className="flex justify-center navbar-content items-center">
-        <Image src={logo} alt="logo" className="w-9" />
-        <h2 className="text-lg ml-2 font-bold tracking-wider logo-text text-white">
-          chronicle
+        <Image src={logo} alt="logo" className="w-9 logo-image" />
+        <h2 className="text-lg ml-2 font-bold tracking-widest logo-text text-white">
+          Chronicle
         </h2>
       </div>
       <button className="text-xl hover:scale-105 duration-300 font-semibold rounded-lg px-3 py-1 bg-white text-gray-600">
