@@ -1,30 +1,45 @@
 "use client";
 
-import React, { useLayoutEffect } from "react";
-import gsap, { ScrollTrigger, Power3 } from "gsap/all";
+import React, { useEffect, useRef } from "react";
+import SplitType from "split-type";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-type Props = {};
+const TextScroll = () => {
+  const textRef = useRef<HTMLParagraphElement>(null);
 
-const TextScroll = (props: Props) => {
-  useLayoutEffect(() => {
-    gsap.to(".line-1", {
-      scrollTrigger: {
-        trigger: ".logo-text",
-        start: "top",
-        end: "+=100",
-        scrub: 50,
-      },
-      text: "In Chronicle everything is made with Blocks that come with pixel perfect design, interactivity and motion out of the box. Instead of designing from scratch, simply choose the right one from our library of blocks and see the magic unfold.",
-      ease: Power3.easeInOut,
-    });
-  });
+  useEffect(() => {
+    const textElement = textRef.current;
+
+    if (textElement) {
+      const splitText = new SplitType(textElement, { types: "chars" });
+
+      // Use splitText.chars directly in the animation
+      gsap.from(splitText.chars, {
+        scrollTrigger: {
+          trigger: textElement,
+          start: "top 80%",
+          end: "bottom 50%",
+          scrub: true,
+          markers: false,
+        },
+        opacity: 0.2,
+        stagger: 0.01,
+      });
+    }
+  }, []);
 
   return (
-    <main className="h-screen bg-black flex flex-col items-center justify-center">
-      <p className="line-1 animated-typewriter text-6xl text-left font-semibold text-gray-300 max-w-5xl"></p>
-    </main>
+    <section className="bg-black pt-52 pb-80 w-full">
+      <p className="text-7xl mx-auto text-white max-w-7xl text-left font-bold leading-tight" ref={textRef}>
+        In Chronicle everything is made with Blocks that come with pixel perfect
+        design, interactivity and motion out of the box. Instead of designing
+        from scratch, simply choose the right one from our library of blocks and
+        see the magic unfold.
+      </p>
+    </section>
   );
 };
 
